@@ -1,9 +1,9 @@
-const path = require("path");
-const promis = require("fs/promises");
-const {stdout} = process;
+const path = require('path');
+const promis = require('fs/promises');
+const { stdout } = process;
 
-const pathDirSrc = path.join(__dirname, "files");
-const pathDirDist = path.join(__dirname, "files-copy");
+const pathDirSrc = path.join(__dirname, 'files');
+const pathDirDist = path.join(__dirname, 'files-copy');
 
 function copyDir() {
   promis
@@ -33,7 +33,7 @@ function copyDir() {
             }
           });
           stdout.write(
-            `Copying files from the 'files' folder to the 'files-copy' folder is successful!`
+            'Copying files from the "files" folder to the "files-copy" folder is successful!'
           );
         });
     });
