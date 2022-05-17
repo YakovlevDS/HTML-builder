@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const {stdout} = process;
+const { stdout } = process;
 const nameTargetFile = 'text.txt';
 const pathToFile = path.join(__dirname, nameTargetFile);
 const stream = fs.createReadStream(pathToFile);
