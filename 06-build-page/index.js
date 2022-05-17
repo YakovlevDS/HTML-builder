@@ -3,6 +3,8 @@
 // 3. Собирает в единый файл стили из папки **styles** и помещает их в файл **project-dist/style.css**.
 // 4. Копирует папку **assets** в **project-dist/assets**
 
+//! НЕ забудь очистить КЕШ в браузере shift+F5
+
 const path = require('path');
 const fs = require('fs');
 
