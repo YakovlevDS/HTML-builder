@@ -3,33 +3,33 @@
 // 3. Собирает в единый файл стили из папки **styles** и помещает их в файл **project-dist/style.css**.
 // 4. Копирует папку **assets** в **project-dist/assets**
 
-const path = require("path");
-const fs = require("fs");
+const path = require('path');
+const fs = require('fs');
 
 // path distination files
-const dist = path.join(__dirname, "project-dist");
-const assetsPathDist = path.join(dist, "assets");
+const dist = path.join(__dirname, 'project-dist');
+const assetsPathDist = path.join(dist, 'assets');
 // path src files
-const assetsPathSrc = path.join(__dirname, "assets");
-const stylesPathSrc = path.join(__dirname, "styles");
-const htmlPathSrc = path.join(__dirname, "components");
+const assetsPathSrc = path.join(__dirname, 'assets');
+const stylesPathSrc = path.join(__dirname, 'styles');
+const htmlPathSrc = path.join(__dirname, 'components');
 
-fs.readdir(stylesPathSrc, {withFileTypes: true}, async (e, files) => {
+fs.readdir(stylesPathSrc, { withFileTypes: true }, async (e, files) => {
   if (e) console.log(e);
   else {
     files.forEach((file, ind) => {
       let filePath = path.join(stylesPathSrc, file.name);
-      const ext = file.name.split(".")[1];
-      if (file.isFile() && ext === "css") {
-        fs.readFile(filePath, "utf8", (err, data) => {
+      const ext = file.name.split('.')[1];
+      if (file.isFile() && ext === 'css') {
+        fs.readFile(filePath, 'utf8', (err, data) => {
           if (err) {
             console.log(err);
           } else if (!ind) {
-            fs.writeFile(path.join(dist, "style.css"), data, (e) => {
+            fs.writeFile(path.join(dist, 'style.css'), data, (e) => {
               if (e) console.log(e);
             });
           } else {
-            fs.appendFile(path.join(dist, "style.css"), data, (err) => {
+            fs.appendFile(path.join(dist, 'style.css'), data, (err) => {
               if (err) console.log(err);
             });
           }
@@ -40,7 +40,7 @@ fs.readdir(stylesPathSrc, {withFileTypes: true}, async (e, files) => {
 });
 
 function recCopy(srcPathDir, distPathDir) {
-  fs.readdir(srcPathDir, {withFileTypes: true}, (e, files) => {
+  fs.readdir(srcPathDir, { withFileTypes: true }, (e, files) => {
     if (e) throw e;
     files.forEach((file) => {
       const srcPathFile = path.join(srcPathDir, file.name);
@@ -92,20 +92,20 @@ fs.stat(assetsPathDist, (e) => {
 });
 
 function createTemplate() {
-  const pathTemp = path.join(__dirname, "template.html");
-  const pathDist = path.join(dist, "index.html");
+  const pathTemp = path.join(__dirname, 'template.html');
+  const pathDist = path.join(dist, 'index.html');
   fs.copyFile(pathTemp, pathDist, (e) => {
     if (e) throw e;
-    fs.readFile(pathDist, "utf8", (e, data) => {
+    fs.readFile(pathDist, 'utf8', (e, data) => {
       if (e) throw e;
-      fs.readdir(htmlPathSrc, {withFileTypes: true}, (e, files) => {
+      fs.readdir(htmlPathSrc, { withFileTypes: true }, (e, files) => {
         if (e) throw e;
 
         files.forEach((i) => {
           const p = path.join(htmlPathSrc, i.name);
-          fs.readFile(p, "utf8", (e, dataFile) => {
+          fs.readFile(p, 'utf8', (e, dataFile) => {
             if (e) throw e;
-            let tagName = `{{${i.name.split(".")[0]}}}`;
+            let tagName = `{{${i.name.split('.')[0]}}}`;
             data = data.replace(tagName, dataFile);
             fs.writeFile(pathDist, data, (e) => {
               if (e) throw e;
